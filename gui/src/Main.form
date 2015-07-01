@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Main">
+  <grid id="27dc6" binding="panel" layout-manager="FormLayout">
+    <rowspec value="center:d:noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <rowspec value="top:4dlu:noGrow"/>
+    <rowspec value="center:max(d;4px):noGrow"/>
+    <colspec value="fill:110px:noGrow"/>
+    <colspec value="fill:4dlu:noGrow"/>
+    <colspec value="fill:max(m;55px):grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:max(m;55px):grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:max(m;55px):grow"/>
+    <colspec value="left:4dlu:noGrow"/>
+    <colspec value="fill:max(m;55px):grow"/>
+    <constraints>
+      <xy x="20" y="20" width="390" height="158"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="c61c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Password Length"/>
+        </properties>
+      </component>
+      <component id="6e969" class="javax.swing.JCheckBox" binding="checkBoxDigits">
+        <constraints>
+          <grid row="2" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="0-9"/>
+        </properties>
+      </component>
+      <component id="424fa" class="javax.swing.JCheckBox" binding="checkBoxUpperCase">
+        <constraints>
+          <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="A-Z"/>
+        </properties>
+      </component>
+      <component id="76766" class="javax.swing.JCheckBox" binding="checkBoxLowerCase">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <selected value="true"/>
+          <text value="a-z"/>
+        </properties>
+      </component>
+      <component id="42861" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Options"/>
+        </properties>
+      </component>
+      <component id="68c45" class="javax.swing.JSpinner" binding="spinnerPasswordLength">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="ab3b4" class="javax.swing.JCheckBox" binding="checkBoxSymbols">
+        <constraints>
+          <grid row="2" column="8" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Sym"/>
+        </properties>
+      </component>
+      <component id="1c166" class="javax.swing.JCheckBox" binding="checkBoxAvoidAmbiguousCharacters">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Avoid Ambiguous Characters"/>
+        </properties>
+      </component>
+      <component id="f1bd3" class="javax.swing.JCheckBox" binding="checkBoxForceEveryCharacterType">
+        <constraints>
+          <grid row="6" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Force Every Character Type"/>
+        </properties>
+      </component>
+      <component id="2c0e1" class="javax.swing.JTextField" binding="textFieldPassword">
+        <constraints>
+          <grid row="8" column="2" row-span="1" col-span="7" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+          <forms defaultalign-horz="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="b7bcd" class="javax.swing.JButton" binding="buttonGenerate">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <forms/>
+        </constraints>
+        <properties>
+          <text value="Generate"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
