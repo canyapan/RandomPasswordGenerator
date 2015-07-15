@@ -19,15 +19,15 @@ package com.canyapan.randompasswordgenerator;
 import java.io.IOException;
 
 public class RandomPasswordGeneratorException extends IOException {
-    public RandomPasswordGeneratorException() {
+    RandomPasswordGeneratorException() {
         super();
     }
 
-    public RandomPasswordGeneratorException(String message) {
+    RandomPasswordGeneratorException(String message) {
         super(message);
     }
 
-    public RandomPasswordGeneratorException(String message, Throwable cause) {
+    RandomPasswordGeneratorException(String message, Throwable cause) {
         super(message, cause);
     }
 }

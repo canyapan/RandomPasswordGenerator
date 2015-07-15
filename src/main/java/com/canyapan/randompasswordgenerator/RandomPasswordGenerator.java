@@ -22,6 +22,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Random Password Generator Library
+ * This library generates random passwords with specified rules.
+ */
 public class RandomPasswordGenerator {
     private final Random random;
     private int passwordLength;
@@ -36,6 +40,10 @@ public class RandomPasswordGenerator {
     private int minUpperCaseCharacterCount;
     private int minSymbolCount;
 
+    /**
+     * Random Password Generator Library
+     * This library generates random passwords with specified rules. Check the chain methods with 'with' prefix.
+     */
     public RandomPasswordGenerator() {
         random = new SecureRandom();
     }
@@ -127,7 +135,12 @@ public class RandomPasswordGenerator {
         return getCharacterList("!@#$%^&*", null, true);
     }
 
-    public void check() throws RandomPasswordGeneratorException {
+    /**
+     * Checks if the generator has enough knowledge to generate a password.
+     *
+     * @throws RandomPasswordGeneratorException thrown when there is a problem with inputs.
+     */
+    private void check() throws RandomPasswordGeneratorException {
         if (!getUseDigits() && !getUseLowerCaseCharacters() && !getUseUpperCaseCharacters() && !getUseSymbols()) {
             throw new RandomPasswordGeneratorException("At least one character set should be selected.");
         }
@@ -140,6 +153,14 @@ public class RandomPasswordGenerator {
         }
     }
 
+    /**
+     * Generates a password with specified rules.
+     *
+     * @return a random password.
+     * @throws RandomPasswordGeneratorException thrown when there is a problem with inputs.
+     *                                          At least one character set should be set before triggering generate method.
+     *                                          Total sum of specified minimum characters should be less or equal than password length.
+     */
     public String generate() throws RandomPasswordGeneratorException {
         if (getForceEveryCharacterType()) {
             if (getUseDigits() && getMinDigitCount() <= 0) {
@@ -199,66 +220,122 @@ public class RandomPasswordGenerator {
         return password.toString();
     }
 
+    /**
+     * Set password length.
+     * @param passwordLength A value > 0 and < 256
+     * @return object itself
+     */
     public RandomPasswordGenerator withPasswordLength(int passwordLength) {
         this.setPasswordLength(passwordLength);
 
         return this;
     }
 
+    /**
+     * Set upper case characters should be included or not.
+     * @param useUpperCaseCharacters
+     * @return object itself
+     */
     public RandomPasswordGenerator withUpperCaseCharacters(boolean useUpperCaseCharacters) {
         this.setUseUpperCaseCharacters(useUpperCaseCharacters);
 
         return this;
     }
 
+    /**
+     * Set lower case characters should be included or not.
+     * @param useLowerCaseCharacters
+     * @return object itself
+     */
     public RandomPasswordGenerator withLowerCaseCharacters(boolean useLowerCaseCharacters) {
         this.setUseLowerCaseCharacters(useLowerCaseCharacters);
 
         return this;
     }
 
+    /**
+     * Set symbols should be included or not.
+     * @param useSymbols
+     * @return object itself
+     */
     public RandomPasswordGenerator withSymbols(boolean useSymbols) {
         this.setUseSymbols(useSymbols);
 
         return this;
     }
 
+    /**
+     * Set digits should be included or not.
+     * @param useDigits
+     * @return object itself
+     */
     public RandomPasswordGenerator withDigits(boolean useDigits) {
         this.setUseDigits(useDigits);
 
         return this;
     }
 
+    /**
+     * Set minimum digit count.
+     * @param minDigitCount
+     * @return object itself
+     */
     public RandomPasswordGenerator withMinDigitCount(int minDigitCount) {
         this.setMinDigitCount(minDigitCount);
 
         return this;
     }
 
+    /**
+     * Set minimum lower case character count.
+     * @param minLowerCaseCharacterCount
+     * @return object itself
+     */
     public RandomPasswordGenerator withMinLowerCaseCharacterCount(int minLowerCaseCharacterCount) {
         this.setMinLowerCaseCharacterCount(minLowerCaseCharacterCount);
 
         return this;
     }
 
+    /**
+     * Set minimum upper case character count.
+     * @param minUpperCaseCharacterCount
+     * @return object itself
+     */
     public RandomPasswordGenerator withMinUpperCaseCharacterCount(int minUpperCaseCharacterCount) {
         this.setMinUpperCaseCharacterCount(minUpperCaseCharacterCount);
 
         return this;
     }
 
-    public RandomPasswordGenerator withMinSpecialCharacterCount(int minSpecialCharacterCount) {
-        this.setMinSymbolCount(minSpecialCharacterCount);
+    /**
+     * Set minimum symbol count.
+     *
+     * @param minSymbolCount
+     * @return object itself
+     */
+    public RandomPasswordGenerator withMinSymbolCount(int minSymbolCount) {
+        this.setMinSymbolCount(minSymbolCount);
 
         return this;
     }
 
+    /**
+     * Set should ambiguous characters be avoided.
+     * @param avoidAmbiguousCharacters
+     * @return object itself
+     */
     public RandomPasswordGenerator withAvoidAmbiguousCharacters(boolean avoidAmbiguousCharacters) {
         this.setAvoidAmbiguousCharacters(avoidAmbiguousCharacters);
 
         return this;
     }
 
+    /**
+     * Set the result password should contain at least 1 character from all selected character types.
+     * @param forceEveryCharacterType
+     * @return object itself
+     */
     public RandomPasswordGenerator withForceEveryCharacterType(boolean forceEveryCharacterType) {
         this.setForceEveryCharacterType(forceEveryCharacterType);
 
@@ -274,7 +351,7 @@ public class RandomPasswordGenerator {
                 .withMinLowerCaseCharacterCount(0)
                 .withMinUpperCaseCharacterCount(0)
                 .withMinDigitCount(1)
-                .withMinSpecialCharacterCount(0)
+                .withMinSymbolCount(0)
                 .withAvoidAmbiguousCharacters(true)
                 .withForceEveryCharacterType(true);
     }

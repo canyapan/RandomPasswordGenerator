@@ -91,7 +91,7 @@ public class Main {
         }
 
         if (cmd.hasOption("sc")) {
-            rpg.withMinSpecialCharacterCount(Integer.parseInt(cmd.getOptionValue("sc", "0")));
+            rpg.withMinSymbolCount(Integer.parseInt(cmd.getOptionValue("sc", "0")));
         }
 
         Scanner scanner = new Scanner(System.in);
