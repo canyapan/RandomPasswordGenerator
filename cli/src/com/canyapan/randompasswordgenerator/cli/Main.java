@@ -16,6 +16,8 @@
 
 package com.canyapan.randompasswordgenerator.cli;
 
+import com.canyapan.randompasswordgenerator.PasswordMeter;
+import com.canyapan.randompasswordgenerator.PasswordMeterException;
 import com.canyapan.randompasswordgenerator.RandomPasswordGenerator;
 import com.canyapan.randompasswordgenerator.RandomPasswordGeneratorException;
 import org.apache.commons.cli.*;
@@ -58,54 +60,48 @@ public class Main {
         RandomPasswordGenerator rpg = new RandomPasswordGenerator();
 
         if (cmd.hasOption("def")) {
-            try {
-                String password = rpg.withDefault()
-                        .withPasswordLength(Integer.parseInt(cmd.getOptionValue("p", "8")))
-                        .generate();
-                System.out.println(password);
-            } catch (RandomPasswordGeneratorException e) {
-                e.printStackTrace();
+            rpg.withDefault().withPasswordLength(Integer.parseInt(cmd.getOptionValue("p", "8")));
+        } else {
+            rpg.withPasswordLength(Integer.parseInt(cmd.getOptionValue("p", "8")))
+                    .withLowerCaseCharacters(cmd.hasOption("l"))
+                    .withUpperCaseCharacters(cmd.hasOption("u"))
+                    .withDigits(cmd.hasOption("d"))
+                    .withSymbols(cmd.hasOption("s"))
+                    .withAvoidAmbiguousCharacters(cmd.hasOption("a"))
+                    .withForceEveryCharacterType(cmd.hasOption("f"));
+
+            if (cmd.hasOption("lc")) {
+                rpg.withMinLowerCaseCharacterCount(Integer.parseInt(cmd.getOptionValue("lc", "0")));
             }
 
-            return;
-        }
+            if (cmd.hasOption("uc")) {
+                rpg.withMinUpperCaseCharacterCount(Integer.parseInt(cmd.getOptionValue("uc", "0")));
+            }
 
-        rpg.withPasswordLength(Integer.parseInt(cmd.getOptionValue("p", "8")))
-                .withLowerCaseCharacters(cmd.hasOption("l"))
-                .withUpperCaseCharacters(cmd.hasOption("u"))
-                .withDigits(cmd.hasOption("d"))
-                .withSymbols(cmd.hasOption("s"))
-                .withAvoidAmbiguousCharacters(cmd.hasOption("a"))
-                .withForceEveryCharacterType(cmd.hasOption("f"));
+            if (cmd.hasOption("dc")) {
+                rpg.withMinDigitCount(Integer.parseInt(cmd.getOptionValue("dc", "0")));
+            }
 
-        if (cmd.hasOption("lc")) {
-            rpg.withMinLowerCaseCharacterCount(Integer.parseInt(cmd.getOptionValue("lc", "0")));
-        }
-
-        if (cmd.hasOption("uc")) {
-            rpg.withMinUpperCaseCharacterCount(Integer.parseInt(cmd.getOptionValue("uc", "0")));
-        }
-
-        if (cmd.hasOption("dc")) {
-            rpg.withMinDigitCount(Integer.parseInt(cmd.getOptionValue("dc", "0")));
-        }
-
-        if (cmd.hasOption("sc")) {
-            rpg.withMinSymbolCount(Integer.parseInt(cmd.getOptionValue("sc", "0")));
+            if (cmd.hasOption("sc")) {
+                rpg.withMinSymbolCount(Integer.parseInt(cmd.getOptionValue("sc", "0")));
+            }
         }
 
         Scanner scanner = new Scanner(System.in);
 
         try {
             do {
-                String password = rpg.generate();
-                System.out.println(password);
+                final String password = rpg.generate();
+                final PasswordMeter.Result result = PasswordMeter.check(password);
+                System.out.printf("%s%nScore: %s%%%nComplexity: %s%n%n", password, result.getScore(), result.getComplexity());
 
                 if (cmd.hasOption("c")) {
                     System.out.print("Another? y/N: ");
                 }
             } while(cmd.hasOption("c") && scanner.nextLine().matches("^(?i:y(?:es)?)$"));
         } catch (RandomPasswordGeneratorException e) {
+            System.err.println(e.getMessage());
+        } catch (PasswordMeterException e) {
             System.err.println(e.getMessage());
         }
     }
