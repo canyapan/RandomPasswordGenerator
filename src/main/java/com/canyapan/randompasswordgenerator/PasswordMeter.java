@@ -89,10 +89,10 @@ public class PasswordMeter {
             }
 
             /* Internal loop through password to check for repeat characters */
-            boolean bCharExists = false;
+            boolean charExists = false;
             for (int b = 0; b < arrPwdLen; b++) {
                 if (arrPwd[a].equals(arrPwd[b]) && a != b) { /* repeat character exists */
-                    bCharExists = true;
+                    charExists = true;
                 /*
                 Calculate increment deduction based on proximity to identical characters
                 Deduction is incremented each time a new match is discovered
@@ -103,7 +103,7 @@ public class PasswordMeter {
                 }
             }
 
-            if (bCharExists) {
+            if (charExists) {
                 repChar++;
                 uniqueCharacters = arrPwdLen - repChar;
                 repInc = uniqueCharacters > 0 ? Math.ceil(repInc / uniqueCharacters) : Math.ceil(repInc);
@@ -195,8 +195,6 @@ public class PasswordMeter {
             score -= sequentialSymbol * multiplierSequentialSymbol;
         }
 
-        Result result = new Result();
-
         /* Determine if mandatory requirements have been met and set image indicators accordingly */
         int minPwdLen = 8;
         if (length == minPwdLen) {
@@ -234,24 +232,12 @@ public class PasswordMeter {
         } else if (score < 0) {
             score = 0;
         }
-        if (score >= 0 && score < 20) {
-            result.complexity = Complexity.TooWeak;
-        } else if (score >= 20 && score < 40) {
-            result.complexity = Complexity.Weak;
-        } else if (score >= 40 && score < 60) {
-            result.complexity = Complexity.Good;
-        } else if (score >= 60 && score < 80) {
-            result.complexity = Complexity.Strong;
-        } else if (score >= 80 && score <= 100) {
-            result.complexity = Complexity.VeryStrong;
-        }
-        result.score = score;
 
-        return result;
+        return new Result(score);
     }
 
     public enum Complexity {
-        TooShort("Too Short"), TooWeak("Too Weak"), Weak("Weak"), Good("Good"), Strong("Strong"), VeryStrong("Very Strong");
+        TooWeak("Too Weak"), Weak("Weak"), Good("Good"), Strong("Strong"), VeryStrong("Very Strong");
 
         private final String text;
 
@@ -266,8 +252,24 @@ public class PasswordMeter {
     }
 
     public static class Result {
-        private int score;
-        private Complexity complexity = Complexity.TooShort;
+        private final int score;
+        private Complexity complexity;
+
+        private Result(int score) {
+            this.score = score;
+
+            if (score >= 0 && score < 20) {
+                complexity = Complexity.TooWeak;
+            } else if (score >= 20 && score < 40) {
+                complexity = Complexity.Weak;
+            } else if (score >= 40 && score < 60) {
+                complexity = Complexity.Good;
+            } else if (score >= 60 && score < 80) {
+                complexity = Complexity.Strong;
+            } else if (score >= 80 && score <= 100) {
+                complexity = Complexity.VeryStrong;
+            }
+        }
 
         public int getScore() {
             return score;
