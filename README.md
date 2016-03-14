@@ -1,4 +1,4 @@
-RandomPasswordGenerator is a random password generation application developed in Java 1.5 compatible.<br />
+RandomPasswordGenerator is a Java 1.5 compatible random password generation library.<br />
 <br />
 Usage:<br />
 <br />
