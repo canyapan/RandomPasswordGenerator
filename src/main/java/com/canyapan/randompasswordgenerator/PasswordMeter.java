@@ -35,10 +35,8 @@ public class PasswordMeter {
                 sequentialAlpha = 0, sequentialNumber = 0, sequentialSymbol = 0, sequentialChar = 0;
         double repInc = 0d;
 
-        if (null == password) {
-            throw new PasswordMeterException("Password cannot be null");
-        } else if (password.isEmpty()) {
-            throw new PasswordMeterException("Password cannot be empty");
+        if (org.apache.commons.lang.StringUtils.isBlank(password)) {
+            throw new PasswordMeterException("Password cannot be blank");
         }
 
         final String alphas = "abcdefghijklmnopqrstuvwxyz";

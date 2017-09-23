@@ -1,7 +1,7 @@
 RandomPasswordGenerator is a Java 1.5 compatible random password generation library.<br />
-<br />
+
 Usage:<br />
-<br />
+
 ```java
 RandomPasswordGenerator passwordGenerator = new RandomPasswordGenerator()
   .withPasswordLength(8)
